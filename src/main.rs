@@ -1,11 +1,10 @@
 use cursive::views::{Dialog, TextView,ListView};
-use std::collections::HashMap;
 
-use crate::sdk::queryList;
+use crate::sdk::query_list;
 mod sdk;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let resp = queryList(0).await?;
+    let resp = query_list(0).await?;
     println!("{:#?}", resp);
     // Creates the cursive root - required for every application.
     // let mut siv = cursive::default();
