@@ -42,7 +42,7 @@ mod tests {
     }
 
     #[test]
-    fn test_query_list() {
+    fn test_get_items() {
         let resp = tokio_test::block_on(get_items(0,10));
         println!("{:#?}", resp.unwrap());
     }
