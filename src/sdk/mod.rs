@@ -24,10 +24,11 @@ pub async fn get_item(item_id: u32) -> Result<Story, Box<dyn std::error::Error>>
     Ok(resp)
 }
 
-pub async fn get_items(start: u32, len: u32) -> Result<Vec<u32>, Box<dyn std::error::Error>>  {
+pub async fn get_items(start: usize, len: usize) -> Result<Vec<u32>, Box<dyn std::error::Error>>  {
     let r = query_list().await?;
     let mut r2 = Vec::<u32>::new();
-    r2.append(&mut r[0..1].to_owned());
+    let s = &r[start..start + len];
+    r2.extend_from_slice(s);
     Ok(r2)
 }
 
