@@ -35,7 +35,7 @@ pub async fn get_items(start: usize, len: usize) -> Result<Vec<u32>, Box<dyn std
 
 #[cfg(test)]
 mod tests {
-    use crate::sdk::get_items;
+    use crate::sdk::{get_item, get_items};
 
     #[test]
     fn it_works() {
@@ -45,6 +45,14 @@ mod tests {
     #[test]
     fn test_get_items() {
         let resp = tokio_test::block_on(get_items(0,10));
-        println!("{:#?}", resp.unwrap());
+        // println!("{:#?}", resp.unwrap());
+        let len = resp.unwrap().len();
+        assert_eq!(len, 10);
+    }
+
+    #[test]
+    fn test_get_item() {
+        let resp = tokio_test::block_on(get_item(100));
+        assert_eq!(resp.unwrap().title.is_empty(), false);
     }
 }
