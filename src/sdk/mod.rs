@@ -6,7 +6,7 @@ pub struct Story {
     title: String,
 }
 
-pub async fn query_list(_max_id: u32) -> Result<Vec<u32>, Box<dyn std::error::Error>>  {
+pub async fn query_list() -> Result<Vec<u32>, Box<dyn std::error::Error>>  {
     let resp = reqwest::get("https://hacker-news.firebaseio.com/v0/topstories.json")
         .await?
         .json::<Vec<u32>>()
