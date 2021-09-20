@@ -2,8 +2,8 @@
 use serde::{Deserialize, Serialize};
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Story {
-    id: Option<i32>,
-    title: String,
+    pub id: u32,
+    pub title: String,
 }
 
 pub async fn query_list() -> Result<Vec<u32>, Box<dyn std::error::Error>>  {
