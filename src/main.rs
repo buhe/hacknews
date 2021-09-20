@@ -1,12 +1,11 @@
 use cursive::views::{Dialog, TextView,ListView};
 use std::collections::HashMap;
 
+use crate::sdk::queryList;
+mod sdk;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let resp = reqwest::get("https://hacker-news.firebaseio.com/v0/topstories.json")
-        .await?
-        .json::<Vec<u32>>()
-        .await?;
+    let resp = queryList(0).await?;
     println!("{:#?}", resp);
     // Creates the cursive root - required for every application.
     // let mut siv = cursive::default();
