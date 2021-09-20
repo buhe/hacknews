@@ -1,10 +1,11 @@
 use cursive::views::{Dialog, TextView,ListView};
 
-use crate::sdk::{get_item, query_list};
+use crate::sdk::{get_item, get_items, query_list};
 mod sdk;
+mod interface;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let resp = query_list().await?;
+    // let resp = get_items(0,10).await?;
     // println!("{:#?}", resp);
     // let resp2 = get_item(resp.first().unwrap().to_owned()).await?;
     // println!("{:#?}", resp2);
