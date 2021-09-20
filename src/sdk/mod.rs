@@ -34,14 +34,16 @@ pub async fn get_items(start: u32, len: u32) -> Result<Vec<u32>, Box<dyn std::er
 
 #[cfg(test)]
 mod tests {
+    use crate::sdk::get_items;
+
     #[test]
     fn it_works() {
         assert_eq!(2 + 2, 4);
     }
 
-    // async fn test_query_list() -> Result<(), Box<dyn std::error::Error>> {
-    //     let resp = get_items(0,10).await?;
-    //     println!("{:#?}", resp);
-    //     Ok(())
-    // }
+    #[test]
+    fn test_query_list() {
+        let resp = tokio_test::block_on(get_items(0,10));
+        println!("{:#?}", resp.unwrap());
+    }
 }
