@@ -21,7 +21,8 @@ async fn main() -> Result<(), Box<dyn error::Error>> {
       for i in 0..resp.len() - 1 {
         ss.push(get_item(resp[i]).await?);
       }
-    interface::tui::show(ss);
+    let mut ui = interface::tui::UI::new();
+    ui.show(ss);
     Ok(())
 }
 
@@ -29,4 +30,7 @@ pub fn next(_c: &mut Cursive) {
     *INDEX.lock().unwrap() += 10;
 }
 pub fn prev(_c: &mut Cursive) {
+    if *INDEX.lock().unwrap() > 0 {
+        *INDEX.lock().unwrap() -= 10;
+    }
 }
