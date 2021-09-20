@@ -1,14 +1,21 @@
-use cursive::views::{Dialog, TextView};
+use cursive::views::{Dialog, TextView,ListView};
+use std::collections::HashMap;
 
-fn main() {
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let resp = reqwest::get("https://httpbin.org/ip")
+        .await?
+        .json::<HashMap<String, String>>()
+        .await?;
+    println!("{:#?}", resp);
     // Creates the cursive root - required for every application.
     let mut siv = cursive::default();
-
+    let mut l = ListView::new();
+    l.add_child("1",TextView::new("2"));
     // Creates a dialog with a single "Quit" button
-    siv.add_layer(Dialog::around(TextView::new("Hello Dialog!"))
-                         .title("Cursive")
-                         .button("Quit", |s| s.quit()));
+    siv.add_layer(l);
 
     // Starts the event loop.
     siv.run();
+    Ok(())
 }
