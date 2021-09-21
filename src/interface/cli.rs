@@ -14,5 +14,6 @@ impl UI {
     pub fn item(&self, item: &Story) {
         println!("{}", item.title);
         println!("{}", item.text);
+        println!("{}", item.url);
     }
 }

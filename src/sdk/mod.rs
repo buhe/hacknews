@@ -6,6 +6,8 @@ pub struct Story {
     pub title: String,
     #[serde(default)]
     pub text: String,
+    #[serde(default)]
+    pub url: String,
 }
 
 pub async fn query_list() -> Result<Vec<u32>, Box<dyn std::error::Error>> {
