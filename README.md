@@ -1,6 +1,15 @@
 ## hacknews
+
 [![hacknews](https://github.com/buhe/hacknews/actions/workflows/rust.yml/badge.svg)](https://github.com/buhe/hacknews/actions/workflows/rust.yml)
+
+### Installation
+
+```bash
+cargo install hacknews
+```
+
 ### API
+
 - https://github.com/HackerNews/API
 ### Http Client
 - reqwest
