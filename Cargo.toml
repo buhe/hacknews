@@ -3,7 +3,8 @@ name = "hacknews"
 version = "0.1.0"
 authors = ["buhe <hare.bu@herewhite.com>"]
 edition = "2018"
-
+description = "hack news"
+license = "MIT"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
