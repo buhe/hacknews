@@ -13,7 +13,10 @@ impl UI {
         let mut l = ListView::new();
         for i in 0..items.len() - 1 {
             let s = &items[i];
-            l.add_child(&s.id.to_string(), TextView::new(&s.title));
+            l.add_child(&s.id.to_string(), LinearLayout::horizontal().child(Button::new(&s.title, |c|{
+                c.clear();
+                // c.add_layer(LinearLayout::vertical().child(TextView::new("&s.title")));
+            })));
         }
         let buttons = LinearLayout::horizontal()
             .child(Button::new("Prev", prev))
@@ -28,17 +31,9 @@ impl UI {
                 buttons,
             ),
         );
-        // let c = &self.siv;
-        l.set_on_select(|c, s| c.add_global_callback('w', |s| s.quit()));
         self.siv.add_layer(l);
         self.siv.add_global_callback('q', |s| s.quit());
         self.siv.run();
     }
-    pub fn flush(&mut self) {
-        self.siv.clear();
-    }
 
-    pub fn select(&mut self) {
-        self.flush();
-    }
 }
