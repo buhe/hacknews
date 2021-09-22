@@ -1,9 +1,5 @@
 use crate::{next, prev, sdk::Story};
-use cursive::{
-    view::SizeConstraint,
-    views::{Button, DummyView, LinearLayout, ListView, ResizedView, TextView},
-    Cursive, CursiveRunnable,
-};
+use cursive::{Cursive, CursiveRunnable, traits::Boxable, view::SizeConstraint, views::{Button, DummyView, LinearLayout, ListView, ResizedView, TextView}};
 pub struct UI {
     siv: CursiveRunnable,
 }
@@ -22,15 +18,14 @@ impl UI {
         let buttons = LinearLayout::horizontal()
             .child(Button::new("Prev", prev))
             .child(Button::new("Next", next))
-            .child(DummyView)
+            .child(DummyView.fixed_width(15))
             .child(Button::new("Quit", Cursive::quit));
-        let buttons2 = LinearLayout::vertical().child(buttons);
         l.add_child(
             "Select",
             ResizedView::new(
-                SizeConstraint::Fixed(20),
+                SizeConstraint::Fixed(50),
                 SizeConstraint::Fixed(1),
-                buttons2,
+                buttons,
             ),
         );
         // let c = &self.siv;
