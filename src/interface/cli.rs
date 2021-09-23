@@ -5,9 +5,9 @@ impl UI {
     pub fn new() -> UI {
         UI {}
     }
-    pub fn show(&mut self, items: Vec<Story>) {
+    pub fn show(&mut self, items: Vec<Result<Story, reqwest::Error>>) {
         for i in 0..items.len() - 1 {
-            let s = &items[i];
+            let s = &items[i].as_ref().unwrap();
             println!("{}: {}", s.id, s.title);
         }
     }

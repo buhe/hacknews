@@ -9,10 +9,10 @@ impl UI {
 
         UI { siv: siv }
     }
-    pub fn show(&mut self, items: Vec<Story>) {
+    pub fn show(&mut self, items:Vec<Result<Story, reqwest::Error>>) {
         let mut l = ListView::new();
         for i in 0..items.len() - 1 {
-            let s = &items[i];
+            let s = &items[i].as_ref().unwrap();
             l.add_child(&s.id.to_string(), LinearLayout::horizontal().child(Button::new(&s.title, |c|{
                 c.clear();
                 // c.add_layer(LinearLayout::vertical().child(TextView::new("&s.title")));
