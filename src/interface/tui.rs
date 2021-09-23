@@ -1,5 +1,5 @@
 use crate::{next, prev, sdk::Story};
-use cursive::{Cursive, CursiveRunnable, traits::Boxable, view::SizeConstraint, views::{Button, DummyView, LinearLayout, ListView, ResizedView, TextView}};
+use cursive::{Cursive, CursiveRunnable, traits::Boxable, view::SizeConstraint, views::{Button, DummyView, LinearLayout, ListView, ResizedView}};
 pub struct UI {
     siv: CursiveRunnable,
 }
