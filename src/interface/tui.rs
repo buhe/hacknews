@@ -1,5 +1,10 @@
 use crate::{next, prev, sdk::Story};
-use cursive::{Cursive, CursiveRunnable, traits::Boxable, view::SizeConstraint, views::{Button, DummyView, LinearLayout, ListView, ResizedView}};
+use cursive::{
+    traits::Boxable,
+    view::SizeConstraint,
+    views::{Button, DummyView, LinearLayout, ListView, ResizedView, TextView},
+    Cursive, CursiveRunnable,
+};
 pub struct UI {
     siv: CursiveRunnable,
 }
@@ -9,14 +14,27 @@ impl UI {
 
         UI { siv: siv }
     }
-    pub fn show(&mut self, items:Vec<Result<Story, reqwest::Error>>) {
+    pub fn show(&mut self, items: Vec<Result<Story, reqwest::Error>>) {
         let mut l = ListView::new();
         for i in 0..items.len() - 1 {
-            let s = &items[i].as_ref().unwrap();
-            l.add_child(&s.id.to_string(), LinearLayout::horizontal().child(Button::new(&s.title, |c|{
-                c.clear();
-                // c.add_layer(LinearLayout::vertical().child(TextView::new("&s.title")));
-            })));
+            let s = items[i].as_ref().unwrap();
+            let title = s.title.clone();
+            let text = s.text.clone();
+            let url = s.url.clone();
+            l.add_child(
+                &s.id.to_string(),
+                LinearLayout::horizontal().child(Button::new(&s.title, move |c| {
+                    c.pop_layer();
+                    c.add_layer(
+                        LinearLayout::vertical()
+                            .child(TextView::new(&title))
+                            .child(DummyView)
+                            .child(TextView::new(&text))
+                            .child(DummyView)
+                            .child(TextView::new(&url)),
+                    );
+                })),
+            );
         }
         let buttons = LinearLayout::horizontal()
             .child(Button::new("Prev", prev))
@@ -25,15 +43,10 @@ impl UI {
             .child(Button::new("Quit", Cursive::quit));
         l.add_child(
             "Select",
-            ResizedView::new(
-                SizeConstraint::Fixed(50),
-                SizeConstraint::Fixed(1),
-                buttons,
-            ),
+            ResizedView::new(SizeConstraint::Fixed(50), SizeConstraint::Fixed(1), buttons),
         );
         self.siv.add_layer(l);
         self.siv.add_global_callback('q', |s| s.quit());
         self.siv.run();
     }
-
 }

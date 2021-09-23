@@ -11,23 +11,20 @@ pub struct Story {
 }
 
 pub async fn get_stories(ids: Vec<u32>) -> Vec<Result<Story, reqwest::Error>> {
-    let list_of_values = futures::future::join_all(
-        ids
-        .iter()
-        .map(|item_id| {
-            reqwest::get(
+    let list_of_values = futures::future::join_all(ids.iter().map(|item_id| {
+        reqwest::get(
             "https://hacker-news.firebaseio.com/v0/item/".to_owned()
                 + item_id.to_string().as_str()
                 + ".json",
-            )
-        })
-    ).await;
+        )
+    }))
+    .await;
     let jsons = futures::future::join_all(
         list_of_values
-        .into_iter()
-        .map(|reps| 
-            reps.unwrap().json::<Story>()
-    )).await;
+            .into_iter()
+            .map(|reps| reps.unwrap().json::<Story>()),
+    )
+    .await;
     jsons
 }
 

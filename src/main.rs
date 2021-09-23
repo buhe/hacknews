@@ -3,7 +3,7 @@ use std::{error, sync::Mutex};
 use crate::sdk::{get_item, get_items};
 use clap::{AppSettings, Clap};
 use cursive::Cursive;
-use sdk::{get_stories};
+use sdk::get_stories;
 mod interface;
 mod sdk;
 const PAGE_SIZE: usize = 20;
