@@ -6,7 +6,7 @@ use cursive::Cursive;
 use sdk::{get_stories};
 mod interface;
 mod sdk;
-const PAGE_SIZE: usize = 10;
+const PAGE_SIZE: usize = 20;
 #[macro_use]
 extern crate lazy_static;
 lazy_static! {
@@ -44,10 +44,10 @@ async fn main() -> Result<(), Box<dyn error::Error>> {
 }
 
 pub fn next(_c: &mut Cursive) {
-    *INDEX.lock().unwrap() += 10;
+    *INDEX.lock().unwrap() += PAGE_SIZE;
 }
 pub fn prev(_c: &mut Cursive) {
     if *INDEX.lock().unwrap() > 0 {
-        *INDEX.lock().unwrap() -= 10;
+        *INDEX.lock().unwrap() -= PAGE_SIZE;
     }
 }
