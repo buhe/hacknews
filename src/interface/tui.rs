@@ -31,7 +31,11 @@ impl UI {
                             .child(DummyView)
                             .child(TextView::new(&text))
                             .child(DummyView)
-                            .child(TextView::new(&url)),
+                            .child(TextView::new(&url))
+                            .child(Button::new("Back", |c|{
+                                c.pop_layer();
+                            }))
+                            ,
                     );
                 })),
             );
